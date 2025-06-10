@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import type { DataInvestment } from './dataInvestment.model';
+import { ResultsData } from './resultsData.model';
 
 @Component({
   selector: 'app-root',
@@ -7,14 +9,12 @@ import { Component } from '@angular/core';
   standalone: false,
 })
 export class AppComponent {
-  protected title = 'Investment-Calculator';
 
-  calculateInvestmentResults(
-    initialInvestment: number,
-    duration: number,
-    expectedReturn: number,
-    annualInvestment: number
-  ) {
+  resultsData?: ResultsData;
+
+  calculateInvestmentResults(dataInvestment: DataInvestment) {
+    const { initialInvestment, duration, expectedReturn, annualInvestment } =
+      dataInvestment;
     const annualData = [];
     let investmentValue = initialInvestment;
 
@@ -33,7 +33,6 @@ export class AppComponent {
         totalAmountInvested: initialInvestment + annualInvestment * year,
       });
     }
-
-    return annualData;
+    this.resultsData = annualData
   }
 }

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormsModule, NgForm, NgModel } from '@angular/forms';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { DataInvestment } from '../dataInvestment.model';
 
 @Component({
   selector: 'app-user',
@@ -8,13 +8,19 @@ import { FormsModule, NgForm, NgModel } from '@angular/forms';
   styleUrl: './user.component.css',
 })
 export class User {
+  @Output() calculate = new EventEmitter<DataInvestment>();
+
   initialValue = '0';
   annualInvestment = '0';
   expectedValue = '5';
   duration = '25';
 
   onSubmit() {
-    console.log('Forms funcionando');
-    console.log('Valor inicial: ', this.initialValue)
+    this.calculate.emit({
+      initialInvestment: +this.initialValue,
+      duration: +this.duration,
+      expectedReturn: +this.expectedValue,
+      annualInvestment: +this.annualInvestment,
+    });
   }
 }

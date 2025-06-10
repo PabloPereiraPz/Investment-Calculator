@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [Header],
-  exports: [Header], // components que devem ser exportados pelo ShareModule.
+  exports: [Header],
   imports: [CommonModule],
 })
 export class HeaderModule {}
