@@ -2,7 +2,12 @@
   <div class="input-group">
     <p>
       <label form="inital-value"> Investimento inicial </label>
-      <input [(ngModel)]="initialValue" id="initial-value" type="number" name="initial-value" />
+      <input
+        [(ngModel)]="initialValue"
+        id="initial-value"
+        type="number"
+        name="initial-value"
+      />
     </p>
 
     <p>
@@ -12,16 +17,15 @@
         id="annual-investment"
         type="number"
         name="annual-investment"
-
       />
     </p>
   </div>
 
-  <div>
+  <div class="input-group">
     <p>
       <label form="expected-value"> Retorno Esperado </label>
       <input
-      [(ngModel)]="expectedValue"
+        [(ngModel)]="expectedValue"
         id="expected-value"
         type="number"
         name="expected-value"
@@ -30,8 +34,18 @@
 
     <p>
       <label form="duration"> Duração </label>
-      <input [(ngModel)]="duration" id="duration" type="number" name="duration" />
+      <input
+        [(ngModel)]="duration"
+        id="duration"
+        type="number"
+        name="duration"
+      />
     </p>
+  </div>
+
+  <div class="taxa">
+    <label for="taxa"> Taxa de juros (%) </label>
+    <input type="number" id="taxa">
   </div>
   <p>
     <button type="submit">Calcular</button>

@@ -1,15 +1,31 @@
 header {
   text-align: center;
-  margin: 3rem auto;
+  margin: 2rem auto;
 }
 
 header img {
-  width: 7rem;
-  height: 7rem;
+  width: 10rem;
+  height: 10rem;
   object-fit: contain;
   background-color: transparent;
 }
 
 header h1 {
-  font-size: 1.5rem;
+  font-family: "Quintessential";
+  letter-spacing: 0.1rem;
+  border-radius: 0.4rem;
+  color: #311b50;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  background-color: #757575;
+  padding: 0.7rem;
+  width: fit-content;
+  text-align: center;
+  margin: auto;
+  transition: ease-in 0.5s;
+}
+
+header h1:hover {
+  transition: ease-out 0.5s;
+  color: #230e3f;
 }
