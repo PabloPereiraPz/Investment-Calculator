@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { DataInvestment } from '../dataInvestment.model';
+import { InvestmentService } from '../investment.service';
 
 @Component({
   selector: 'app-user',
@@ -12,15 +13,49 @@ export class User {
 
   initialValue = '0';
   annualInvestment = '0';
-  expectedValue = '5';
-  duration = '25';
+  expectedValue = '0';
+  duration = '0';
+  taxRate = '0';
+
+  constructor (private InvestmentService: InvestmentService) {}
+
+  formatCurrency(value: string): string {
+    if (value === '0') return '';
+    const numValue = parseFloat(value);
+    return numValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  }
+
+  formatPercentage(value: string): string {
+    if (value === '0') return '';
+    return value + '%';
+  }
 
   onSubmit() {
-    this.calculate.emit({
-      initialInvestment: +this.initialValue,
-      duration: +this.duration,
-      expectedReturn: +this.expectedValue,
-      annualInvestment: +this.annualInvestment,
-    });
+    if (this.isValidInput()) {
+      this.InvestmentService.calculateInvestmentResults({
+        initialInvestment: +this.initialValue,
+        duration: +this.duration,
+        expectedReturn: +this.expectedValue,
+        annualInvestment: +this.annualInvestment,
+        taxRate: +this.taxRate,
+      });
+      this.resetForm();
+    }
+  }
+
+  private isValidInput(): boolean {
+    return +this.initialValue > 0 &&
+           +this.duration > 0 &&
+           +this.expectedValue >= 0 &&
+           +this.annualInvestment >= 0 &&
+           +this.taxRate >= 0;
+  }
+
+  private resetForm() {
+    this.initialValue = '0';
+    this.duration = '0';
+    this.annualInvestment = '0';
+    this.expectedValue = '0';
+    this.taxRate = '0';
   }
 }

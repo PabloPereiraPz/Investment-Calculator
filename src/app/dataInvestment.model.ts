@@ -3,4 +3,5 @@ export interface DataInvestment {
   duration: number;
   expectedReturn: number;
   annualInvestment: number;
+  taxRate: number;
 }

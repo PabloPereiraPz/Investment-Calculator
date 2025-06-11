@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { User } from './user.component';
 import { FormsModule } from '@angular/forms';
+import { User } from './user.component';
 
 @NgModule({
   declarations: [User],

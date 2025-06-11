@@ -1,53 +1,89 @@
-<form (ngSubmit)="onSubmit()">
+<form (ngSubmit)="onSubmit()" #investmentForm="ngForm">
   <div class="input-group">
     <p>
-      <label form="inital-value"> Investimento inicial </label>
+      <label for="initial-value">Capital Inicial (R$)</label>
       <input
         [(ngModel)]="initialValue"
         id="initial-value"
         type="number"
         name="initial-value"
+        placeholder="Ex: 1000"
+        class="currency-input"
+        required
+        min="0"
       />
+      <span class="currency-preview" *ngIf="initialValue !== '0'">
+        {{ formatCurrency(initialValue) }}
+      </span>
     </p>
 
     <p>
-      <label form="annual-investment"> Investimento Anual </label>
+      <label for="annual-investment">Aporte Anual (R$)</label>
       <input
         [(ngModel)]="annualInvestment"
         id="annual-investment"
         type="number"
         name="annual-investment"
+        placeholder="Ex: 100"
+        class="currency-input"
+        required
+        min="0"
       />
+      <span class="currency-preview" *ngIf="annualInvestment !== '0'">
+        {{ formatCurrency(annualInvestment) }}
+      </span>
     </p>
   </div>
 
   <div class="input-group">
     <p>
-      <label form="expected-value"> Retorno Esperado </label>
+      <label for="expected-value">Rentabilidade Anual (%)</label>
       <input
         [(ngModel)]="expectedValue"
         id="expected-value"
         type="number"
         name="expected-value"
+        placeholder="Ex: 10"
+        class="percentage-input"
+        required
+        min="0"
       />
+      <span class="percentage-preview" *ngIf="expectedValue !== '0'">
+        {{ formatPercentage(expectedValue) }}
+      </span>
     </p>
 
     <p>
-      <label form="duration"> Duração </label>
+      <label for="duration">Período (anos)</label>
       <input
         [(ngModel)]="duration"
         id="duration"
         type="number"
         name="duration"
+        placeholder="Ex: 5"
+        required
+        min="1"
       />
     </p>
   </div>
 
   <div class="taxa">
-    <label for="taxa"> Taxa de juros (%) </label>
-    <input type="number" id="taxa">
+    <label for="taxa">Taxa de Juros Adicional (%)</label>
+    <input
+      [(ngModel)]="taxRate"
+      type="number"
+      id="taxa"
+      name="taxa"
+      placeholder="Ex: 2"
+      class="percentage-input"
+      required
+      min="0"
+    />
+    <span class="percentage-preview" *ngIf="taxRate !== '0'">
+      {{ formatPercentage(taxRate) }}
+    </span>
   </div>
   <p>
-    <button type="submit">Calcular</button>
+    <button type="submit" [disabled]="!investmentForm.form.valid">Calcular Investimento</button>
   </p>
 </form>
